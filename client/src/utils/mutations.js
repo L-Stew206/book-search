@@ -25,8 +25,8 @@ export const ADD_USER = gql`
 `;
 
 export const SAVE_BOOK = gql`
-  mutation saveBooks ($bookData: BookInput!) {
-    saveBooks(bookData: $bookData) {
+  mutation saveBook ($bookData: BookInput!) {
+    saveBook(bookData: $bookData) {
     _id
     username
     email
