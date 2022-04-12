@@ -38,8 +38,8 @@ const LoginForm = () => {
       // const { token, user } = await response.json();
       // console.log(user);
       const {data} = await loginUser ({
-        variables: userFormData
-      })
+        variables: {...userFormData}
+      });
       if (!data) throw new Error("Something went wrong!")
       Auth.login(data.login.token);
     } catch (err) {
