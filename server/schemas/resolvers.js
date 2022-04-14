@@ -39,11 +39,11 @@ const resolvers = {
             return { token, user };
         },
 
-        saveBook: async (parent, { userId, book }, context) => {
+        saveBook: async (parent, { bookData }, context) => {
             if (context.user) {
                 return User.findOneAndUpdate(
-                  { _id: userId },
-                  { $addToSet: { books: book } },
+                  { _id: context.user._id },
+                  { $addToSet: { savedBooks: bookData } },
                   {
                     new: true,
                     runValidators: true,
@@ -53,11 +53,11 @@ const resolvers = {
               throw new AuthenticationError("Please log in first.");
             },
 
-        removeBook: async (parent, { book }, context) => {
+        removeBook: async (parent, { bookId }, context) => {
             if (context.user) {
                 return User.findOneAndUpdate(
                   { _id: context.user._id },
-                  { $pull: { books: book } },
+                  { $pull: { savedBooks: {bookId} }},
                   { new: true }
                 );
               }
